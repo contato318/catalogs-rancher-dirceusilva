@@ -1,3 +1,4 @@
+version: '2'
 volumes:
     radarr-config-data:
       driver: ${volumedriver}
@@ -5,7 +6,6 @@ volumes:
       driver: ${volumedriver}
     radarr-movies-data:
       driver: ${volumedriver}
-
 
 services:
   radarr:

@@ -1,13 +1,3 @@
-
-
-Radarr é um gerenciador de filmes. Você poderá procurar, realizar download e assistir filmes por ele. Normalmente, ele utiliza Usenet e BitTorrent. Você deverá ter contas nesses serviços para poder realizar o download.
-
-Site oficial do produto/fornecedor:
-https://radarr.video
-Repositório do produto/fornecedor:
-https://github.com/Radarr/Radarr
-
-
 # Radarr
 
 ### Informações:
