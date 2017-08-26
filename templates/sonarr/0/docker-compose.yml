@@ -1,0 +1,20 @@
+version: '2'
+volumes:
+    sonarr-config-data:
+      driver: ${volumedriver}
+    sonarr-downloads-data:
+      driver: ${volumedriver}
+    sonarr-tv-data:
+      driver: ${volumedriver}
+
+services:
+  sonarr:
+    ports:
+      - ${http_port}:8989/tcp
+    labels:
+      io.rancher.container.hostname_override: container_name
+    image: linuxserver/sonarr
+    volumes:
+      - sonarr-downloads-data:/downloads
+      - sonarr-config-data:/config
+      - sonarr-tv-data:/tv
