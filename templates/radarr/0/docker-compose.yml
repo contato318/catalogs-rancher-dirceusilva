@@ -1,3 +1,4 @@
+version: '2'
 volumes:
     radarr-config-data:
       driver: ${volumedriver}
