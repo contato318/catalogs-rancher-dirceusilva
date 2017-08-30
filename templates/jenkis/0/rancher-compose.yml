@@ -19,6 +19,12 @@ version: '2'
         required: true
         default: 9097
         type: "int"
+      - variable: "volume_work"
+        description: "Local em disco onde o Jenkis irá salvar o trabalho"
+        label: "Volume:"
+        required: true
+        default: "/var/lib/docker/jenkins-ci"
+        type: "string"
       - variable: "plugins"
         type: "multiline"
         label: "Lista de plugins"
