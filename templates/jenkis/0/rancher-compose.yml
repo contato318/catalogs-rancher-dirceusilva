@@ -1,0 +1,67 @@
+version: '2'
+.catalog:
+  name: Jenkis
+  version: 0.0.1-jenkis-rancher
+  description: |
+    O principal servidor de automação de código aberto, a Jenkins fornece centenas de plugins para apoiar a construção, implantação e automação de qualquer projeto.
+  minimum_rancher_version: v0.56.0
+  maintainer: "Dirceu Silva <contato@dirceusilva.com>"
+  questions:
+      - variable: "domain_app"
+        description: "Informe a tag (FQDN) para esse serviço"
+        label: "FQDN Result:"
+        required: true
+        default: "jenkis.app"
+        type: "string"
+      - variable: "http_port"
+        description: "Porta HTTP que será exposta:"
+        label: "Porta HTTP:"
+        required: true
+        default: 9097
+        type: "int"
+      - variable: "plugins"
+        type: "multiline"
+        label: "Lista de plugins"
+        description: |
+          Lista de plugins a serem utilizados no jenkis
+        default: |
+          credentials
+          git
+          git-client
+          github
+          github-api
+          github-oauth
+          greenballs
+          junit
+          plain-credentials
+          scm-api
+          ssh-credentials
+          ssh-slaves
+          swarm
+
+
+services:
+
+    app-lb:
+      scale: 1
+      load_balancer_config:
+        haproxy_config: {}
+      health_check:
+        port: 42
+        interval: 2000
+        unhealthy_threshold: 3
+        strategy: recreate
+        response_timeout: 2000
+        healthy_threshold: 2
+
+    jenkis:
+        scale: 1
+        metadata:
+          plugins: |
+            ${plugins}
+
+    jenkins-plugins:
+        scale: 1
+
+      jenkins-datavolume:
+        scale: 1

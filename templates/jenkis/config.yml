@@ -1,0 +1,9 @@
+---
+name: Jenkis
+description: >
+  O principal servidor de automação de código aberto, a Jenkins fornece centenas de plugins para apoiar a construção, implantação e automação de qualquer projeto.
+version: 0.0.1-jenkis-rancher
+category: CI
+maintainer: Dirceu Silva <contato@dirceusilva.com>
+license: GNU GPL v3
+projectURL: https://github.com/contato318/catalogs-rancher-dirceusilva
