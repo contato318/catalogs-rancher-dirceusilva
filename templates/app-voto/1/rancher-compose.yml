@@ -39,11 +39,16 @@ app-lb:
     healthy_threshold: 2
 result:
   scale: 1
+  start_on_create: true
 redis:
   scale: 1
+  start_on_create: true
 vote:
   scale: 2
+  start_on_create: true
 worker:
   scale: 1
+  start_on_create: true
 postgres:
   scale: 1
+  start_on_create: true
