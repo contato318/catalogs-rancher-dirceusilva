@@ -38,8 +38,6 @@ version: '2'
           ssh-credentials
           ssh-slaves
           swarm
-
-
 services:
 
     app-lb:
