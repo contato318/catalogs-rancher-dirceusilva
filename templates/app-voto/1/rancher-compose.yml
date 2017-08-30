@@ -23,7 +23,7 @@ catalog:
       description: "Porta HTTP que será exposta:"
       label: "Porta HTTP:"
       required: true
-      default: 9095
+      default: 9096
       type: "int"
 
 app-lb:
