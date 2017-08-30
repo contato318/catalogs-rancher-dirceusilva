@@ -11,7 +11,7 @@ services:
         - jenkis:jenkis
         stdin_open: true
 
-      jenkis:
+    jenkis:
         image: "jenkins:1.651.3"
         labels:
           io.rancher.sidekicks: jenkins-plugins,jenkins-datavolume
@@ -22,10 +22,10 @@ services:
         entrypoint: /usr/share/jenkins/rancher/jenkins.sh
 
 
-      jenkins-plugins:
+    jenkins-plugins:
         image: rancher/jenkins-plugins:v0.1.1
 
-      jenkins-datavolume:
+    jenkins-datavolume:
         image: "busybox"
         volumes:
           - ${volume_work}:/var/jenkins_home
