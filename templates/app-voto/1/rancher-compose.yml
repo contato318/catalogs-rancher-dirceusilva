@@ -43,7 +43,7 @@ result:
 redis:
   scale: 1
 vote:
-  scale: 15
+  scale: 2
 worker:
   scale: 1
 postgres:
