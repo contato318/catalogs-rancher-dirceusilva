@@ -1,5 +1,4 @@
 version: '2'
-
 app-lb:
   ports:
   - ${http_port}:${http_port}
@@ -17,7 +16,7 @@ result:
   labels:
     io.rancher.container.pull_image: always
     io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/result
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
   tty: true
   image: davecss/result
   links:
@@ -26,7 +25,7 @@ redis:
   labels:
     io.rancher.container.pull_image: always
     io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/redis
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
   tty: true
   image: redis:alpine
   stdin_open: true
@@ -34,7 +33,7 @@ vote:
   labels:
     io.rancher.container.pull_image: always
     io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/vote
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
   tty: true
   image: davecss/vote
   links:
@@ -43,7 +42,7 @@ worker:
   labels:
     io.rancher.container.pull_image: always
     io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/worker
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
   tty: true
   image: davecss/worker
   links:
@@ -53,7 +52,7 @@ postgres:
   labels:
     io.rancher.container.pull_image: always
     io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/postgres
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
   tty: true
   image: postgres:9.4
   stdin_open: true
