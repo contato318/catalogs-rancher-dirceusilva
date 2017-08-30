@@ -12,4 +12,10 @@ services:
         stdin_open: true
 
     gitlab:
-      image: gitlab-ce
+      labels:
+           io.rancher.container.start_once: 'true'
+      image: gitlab/gitlab-ce
+      volumes:
+        - /etc/gitlab
+        - /var/log/gitlab
+        - /var/opt/gitlab
