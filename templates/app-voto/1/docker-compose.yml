@@ -1,5 +1,6 @@
 version: '2'
 services:
+
   app-lb:
     ports:
     - ${http_port}:${http_port}
@@ -13,6 +14,7 @@ services:
     - result:result
     - vote:vote
     stdin_open: true
+
   result:
     labels:
       io.rancher.container.pull_image: always
@@ -22,6 +24,7 @@ services:
     image: davecss/result
     links:
     - postgres:db
+
   redis:
     labels:
       io.rancher.container.pull_image: always
@@ -30,6 +33,7 @@ services:
     tty: true
     image: redis:alpine
     stdin_open: true
+
   vote:
     labels:
       io.rancher.container.pull_image: always
@@ -39,6 +43,7 @@ services:
     image: davecss/vote
     links:
     - 'redis:'
+
   worker:
     labels:
       io.rancher.container.pull_image: always
@@ -49,6 +54,7 @@ services:
     links:
     - postgres:db
     - 'redis:'
+
   postgres:
     labels:
       io.rancher.container.pull_image: always
