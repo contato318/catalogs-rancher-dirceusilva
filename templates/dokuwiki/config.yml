@@ -1,7 +1,7 @@
 ---
 name: Dokuwiki
 description: >
-  Dokuwiki
+  Dokuwiki é um sistema de wiki leve, feito em php e não utiliza banco de dados.
 version: 0.0.1-rancher1-doku
 category: Wiki
 maintainer: Luiz Henrique <luiz@madeiracampos.com>
