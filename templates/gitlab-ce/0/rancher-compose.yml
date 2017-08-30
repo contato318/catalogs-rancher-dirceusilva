@@ -35,5 +35,5 @@ services:
         response_timeout: 2000
         healthy_threshold: 2
 
-    gitlab-ce:
+    gitlab:
         scale: 1
