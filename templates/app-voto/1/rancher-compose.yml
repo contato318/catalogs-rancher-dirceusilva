@@ -6,7 +6,7 @@ catalog:
     Um exmeplo de stack para o Rancher.
   minimum_rancher_version: v0.56.0
   maintainer: "Dirceu Silva <contato@dirceusilva.com>"
-  uuid: vote-0
+  uuid: vote-1
   questions:
     - variable: "domain_vote"
       description: "Informe a tag (FQDN) para esse serviço (Vote)"
