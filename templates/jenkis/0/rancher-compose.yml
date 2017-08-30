@@ -53,7 +53,7 @@ services:
         strategy: recreate
         response_timeout: 2000
         healthy_threshold: 2
-
+        
     jenkis:
         scale: 1
         metadata:
