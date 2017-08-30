@@ -4,7 +4,7 @@ services:
         ports:
         - ${http_port}:${http_port}
         labels:
-          io.rancher.loadbalancer.target.jenkis: ${domain_app}:${http_port}=5000
+          io.rancher.loadbalancer.target.jenkis: ${domain_app}:${http_port}=8080
         tty: true
         image: rancher/load-balancer-service
         links:
