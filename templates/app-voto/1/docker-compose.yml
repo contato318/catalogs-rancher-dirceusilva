@@ -1,58 +1,59 @@
 version: '2'
-app-lb:
-  ports:
-  - ${http_port}:${http_port}
-  labels:
-    io.rancher.loadbalancer.target.vote: ${domain_vote}:${http_port}=80
-    io.rancher.loadbalancer.target.result: ${domain_result}:${http_port}=80
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/app-lb
-  tty: true
-  image: rancher/load-balancer-service
-  links:
-  - result:result
-  - vote:vote
-  stdin_open: true
-result:
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/result
-  tty: true
-  image: davecss/result
-  links:
-  - postgres:db
-redis:
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/redis
-  tty: true
-  image: redis:alpine
-  stdin_open: true
-vote:
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-  tty: true
-  image: davecss/vote
-  links:
-  - 'redis:'
-worker:
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/worker
-  tty: true
-  image: davecss/worker
-  links:
-  - postgres:db
-  - 'redis:'
-postgres:
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/postgres
-  tty: true
-  image: postgres:9.4
-  stdin_open: true
+services:
+    app-lb:
+      ports:
+      - ${http_port}:${http_port}
+      labels:
+        io.rancher.loadbalancer.target.vote: ${domain_vote}:${http_port}=80
+        io.rancher.loadbalancer.target.result: ${domain_result}:${http_port}=80
+        io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/app-lb
+      tty: true
+      image: rancher/load-balancer-service
+      links:
+      - result:result
+      - vote:vote
+      stdin_open: true
+    result:
+      labels:
+        io.rancher.container.pull_image: always
+        io.rancher.container.hostname_override: container_name
+        io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/result
+      tty: true
+      image: davecss/result
+      links:
+      - postgres:db
+    redis:
+      labels:
+        io.rancher.container.pull_image: always
+        io.rancher.container.hostname_override: container_name
+        io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/redis
+      tty: true
+      image: redis:alpine
+      stdin_open: true
+    vote:
+      labels:
+        io.rancher.container.pull_image: always
+        io.rancher.container.hostname_override: container_name
+        io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/vote
+      tty: true
+      image: davecss/vote
+      links:
+      - 'redis:'
+    worker:
+      labels:
+        io.rancher.container.pull_image: always
+        io.rancher.container.hostname_override: container_name
+        io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/worker
+      tty: true
+      image: davecss/worker
+      links:
+      - postgres:db
+      - 'redis:'
+    postgres:
+      labels:
+        io.rancher.container.pull_image: always
+        io.rancher.container.hostname_override: container_name
+        io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/postgres
+      tty: true
+      image: postgres:9.4
+      stdin_open: true
