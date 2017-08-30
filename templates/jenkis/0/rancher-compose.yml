@@ -53,15 +53,9 @@ services:
         strategy: recreate
         response_timeout: 2000
         healthy_threshold: 2
-        
+
     jenkis:
         scale: 1
         metadata:
           plugins: |
             ${plugins}
-
-    jenkins-plugins:
-        scale: 1
-
-      jenkins-datavolume:
-        scale: 1
