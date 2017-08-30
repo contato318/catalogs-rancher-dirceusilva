@@ -1,0 +1,9 @@
+---
+name: Voto
+description: >
+  Uma aplicação de exemplo, apenas para testar o rancher.
+version: 0.0.1-rancher1
+category: Exemplo
+maintainer: Dirceu Silva <contato@dirceusilva.com>
+license: GNU GPL v3
+projectURL: https://github.com/contato318/catalogs-rancher-dirceusilva
