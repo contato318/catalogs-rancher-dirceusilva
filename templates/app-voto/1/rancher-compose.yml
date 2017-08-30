@@ -26,34 +26,37 @@ catalog:
       default: 9096
       type: "int"
 
-app-lb:
-  scale: 1
-  load_balancer_config:
-    haproxy_config: {}
-  health_check:
-    port: 42
-    interval: 2000
-    unhealthy_threshold: 3
-    strategy: recreate
-    response_timeout: 2000
-    healthy_threshold: 2
 
-result:
-  scale: 1
-  start_on_create: true
+services:
 
-redis:
-  scale: 1
-  start_on_create: true
+    app-lb:
+      scale: 1
+      load_balancer_config:
+        haproxy_config: {}
+      health_check:
+        port: 42
+        interval: 2000
+        unhealthy_threshold: 3
+        strategy: recreate
+        response_timeout: 2000
+        healthy_threshold: 2
 
-vote:
-  scale: 2
-  start_on_create: true
+    result:
+      scale: 1
+      start_on_create: true
 
-worker:
-  scale: 1
-  start_on_create: true
+    redis:
+      scale: 1
+      start_on_create: true
 
-postgres:
-  scale: 1
-  start_on_create: true
+    vote:
+      scale: 2
+      start_on_create: true
+
+    worker:
+      scale: 1
+      start_on_create: true
+
+    postgres:
+      scale: 1
+      start_on_create: true
