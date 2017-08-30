@@ -1,0 +1,9 @@
+---
+name: Gitlab-CE
+description: >
+  Alternativa opensource para o Github
+version: 0.0.1-gitlab-rancher
+category: Versionamento
+maintainer: Dirceu Silva <contato@dirceusilva.com>
+license: GNU GPL v3
+projectURL: https://github.com/contato318/catalogs-rancher-dirceusilva

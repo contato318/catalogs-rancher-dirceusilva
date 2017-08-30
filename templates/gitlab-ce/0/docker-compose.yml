@@ -1,0 +1,15 @@
+version: '2'
+services:
+    app-lb:
+        ports:
+        - ${http_port}:${http_port}
+        labels:
+          io.rancher.loadbalancer.target.wordpress: ${domain_app}:${http_port}=80
+        tty: true
+        image: rancher/load-balancer-service
+        links:
+        - gitlab-ce:gitlab-ce
+        stdin_open: true
+
+    gitlab:
+      image: gitlab-ce
