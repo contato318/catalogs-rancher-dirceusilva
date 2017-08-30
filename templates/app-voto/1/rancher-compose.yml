@@ -1,0 +1,50 @@
+version: '2'
+catalog:
+  name: Vote
+  version: 0.0.2-rancher1
+  description: |
+    Um exmeplo de stack para o Rancher.
+  minimum_rancher_version: v0.56.0
+  maintainer: "Dirceu Silva <contato@dirceusilva.com>"
+  uuid: vote-0
+  questions:
+    - variable: "domain_vote"
+      description: "Informe a tag (FQDN) para esse serviço (Vote)"
+      label: "FQDN Vote:"
+      required: true
+      default: "vote.app"
+      type: "string"
+    - variable: "domain_result"
+      description: "Informe a tag (FQDN) para esse serviço (Result)"
+      label: "FQDN Result:"
+      required: true
+      default: "result.app"
+      type: "string"
+    - variable: "http_port"
+      description: "Porta HTTP que será exposta:"
+      label: "Porta HTTP:"
+      required: true
+      default: 9095
+      type: "int"
+
+app-lb:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    healthy_threshold: 2
+result:
+  scale: 1
+redis:
+  scale: 1
+vote:
+  scale: 5
+worker:
+  scale: 1
+postgres:
+  scale: 1
