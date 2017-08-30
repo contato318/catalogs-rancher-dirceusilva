@@ -12,13 +12,13 @@ catalog:
       description: "Informe a tag (FQDN) para esse serviço (Vote)"
       label: "FQDN Vote:"
       required: true
-      default: "vote.app
+      default: "vote.app"
       type: "string"
     - variable: "domain_result"
       description: "Informe a tag (FQDN) para esse serviço (Result)"
       label: "FQDN Result:"
       required: true
-      default: "result.app
+      default: "result.app"
       type: "string"
     - variable: "http_port"
       description: "Porta HTTP que será exposta:"
