@@ -1,0 +1,39 @@
+version: '2'
+.catalog:
+  name: Wordpress
+  version: 0.0.1-wordpress-rancher
+  description: |
+    O sistema de gerenciamento de conteúdo rico do WordPress pode utilizar plugins, widgets e temas.
+  minimum_rancher_version: v0.56.0
+  maintainer: "Dirceu Silva <contato@dirceusilva.com>"
+  questions:
+      - variable: "domain_app"
+        description: "Informe a tag (FQDN) para esse serviço"
+        label: "FQDN Result:"
+        required: true
+        default: "ghost.app"
+        type: "string"
+      - variable: "http_port"
+        description: "Porta HTTP que será exposta:"
+        label: "Porta HTTP:"
+        required: true
+        default: 9099
+        type: "int"
+
+
+services:
+
+    app-lb:
+      scale: 1
+      load_balancer_config:
+        haproxy_config: {}
+      health_check:
+        port: 42
+        interval: 2000
+        unhealthy_threshold: 3
+        strategy: recreate
+        response_timeout: 2000
+        healthy_threshold: 2
+
+    ghost:
+        scale: 1

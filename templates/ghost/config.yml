@@ -1,0 +1,9 @@
+---
+name: Ghost
+description: >
+  Blog leve e eficiente.
+version: 0.0.1-ghost-rancher
+category: CMS
+maintainer: Dirceu Silva <contato@dirceusilva.com>
+license: GNU GPL v3
+projectURL: https://github.com/contato318/catalogs-rancher-dirceusilva

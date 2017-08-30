@@ -1,0 +1,17 @@
+version: '2'
+services:
+    app-lb:
+          ports:
+          - ${http_port}:${http_port}
+          labels:
+            io.rancher.loadbalancer.target.ghost: ${domain_app}:${http_port}=2368
+          tty: true
+          image: rancher/load-balancer-service
+          links:
+          - ghost:ghost
+          stdin_open: true
+    ghost:
+          labels:
+            io.rancher.container.pull_image: always
+          tty: true
+          image: ghost
