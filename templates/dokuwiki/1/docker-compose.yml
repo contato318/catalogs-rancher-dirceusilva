@@ -1,0 +1,20 @@
+version: '2'
+services:
+  app-lb:
+    ports:
+    - ${http_port}:${http_port}
+    labels:
+      io.rancher.loadbalancer.target.dokuwiki: ${dokuwiki_hostname}:${http_port}=80
+    tty: true
+    image: rancher/load-balancer-service
+    links:
+    - dokuwiki:dokuwiki
+    stdin_open: true
+  dokuwiki:
+    image: 'bitnami/dokuwiki:latest'
+    tty: true
+    volumes:
+      - 'dokuwiki_data:/bitnami'
+volumes:
+  dokuwiki_data:
+    driver: local

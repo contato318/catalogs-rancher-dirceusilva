@@ -1,0 +1,36 @@
+version: '2'
+catalog:
+  name: Dokuwiki
+  version: 0.0.2-rancher1-doku
+  description: |
+    Dokuwiki
+  minimum_rancher_version: v0.56.0
+  maintainer: "Luiz Henrique <luiz@madeiracampos.com>"
+  questions:
+    - variable: "dokuwiki_hostname"
+      description: "Hostname (domínio)"
+      label: "Hostname:"
+      required: true
+      default: "dw.example.com"
+      type: "string"
+    - variable: "http_port"
+      description: "Porta que será utilizada:"
+      label: "Porta:"
+      required: true
+      default: 8080
+      type: "int"
+
+app-lb:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    healthy_threshold: 2
+
+dokuwiki:
+  scale: 1
