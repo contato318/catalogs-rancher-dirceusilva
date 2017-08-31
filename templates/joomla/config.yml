@@ -1,7 +1,7 @@
 ---
 name: Joomla
 description: >
-  Joomla CMS
+  Sistema de Gerenciamento de Conteúdo.
 version: v0.1-joomla
 category: CMS
 maintainer: Luiz Henrique <luiz@madeiracampos.com>

@@ -1,7 +1,7 @@
 ---
 name: Owncloud
 description: >
-  Repositório de arquivos
+  Repositório de arquivos.
 version: v0.1-owncloud
 category: Repositório
 maintainer: Luiz Henrique <luiz@madeiracampos.com>
