@@ -1,7 +1,7 @@
 version: '2'
 .catalog:
   name: Wordpress
-  version: 0.0.1-wordpress-rancher
+  version: 0.0.1-ghost-rancher
   description: |
     O sistema de gerenciamento de conteúdo rico do WordPress pode utilizar plugins, widgets e temas.
   minimum_rancher_version: v0.56.0
