@@ -11,7 +11,7 @@ catalog:
       description: "Hostname (domínio)"
       label: "Hostname:"
       required: true
-      default: "dw.example.com"
+      default: "dokuwiki"
       type: "string"
     - variable: "http_port"
       description: "Porta que será utilizada:"
