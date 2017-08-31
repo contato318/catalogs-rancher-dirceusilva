@@ -1,12 +1,11 @@
 version: '2'
 catalog:
   name: Dokuwiki
-  version: v0.1-dokuwiki
+  version: 0.0.1-rancher1-doku
   description: |
     Dokuwiki
   minimum_rancher_version: v0.56.0
   maintainer: "Luiz Henrique <luiz@madeiracampos.com>"
-  uuid: dokuwiki-0
   questions:
     - variable: "dokuwiki_hostname"
       description: "Dokuwiki hostname"
@@ -33,6 +32,6 @@ app-lb:
     strategy: recreate
     response_timeout: 2000
     healthy_threshold: 2
-    
+
 dokuwiki:
   scale: 1
