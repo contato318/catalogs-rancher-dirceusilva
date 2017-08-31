@@ -1,7 +1,7 @@
 version: '2'
 catalog:
   name: Dokuwiki
-  version: 0.0.1-rancher1-doku
+  version: v0.0.1-doku
   description: |
     Dokuwiki
   minimum_rancher_version: v0.56.0
