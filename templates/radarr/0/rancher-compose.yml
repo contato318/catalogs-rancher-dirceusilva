@@ -6,7 +6,6 @@ catalog:
     Um gerenciador de filmes rápido, fácil e eficiente.
   minimum_rancher_version: v0.56.0
   maintainer: "Dirceu Silva <contato@dirceusilva.com>"
-  uuid: radarr-0
   questions:
     - variable: "radarr hostname"
       description: "Radarr hostname"
