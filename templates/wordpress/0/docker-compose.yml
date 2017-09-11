@@ -46,4 +46,4 @@ services:
       environment:
         MYSQL_ROOT_PASSWORD: ${db_password}
       volumes:
-         - raiz-bd-wordpress:/var/lib
+         - raiz-bd-wordpress:/var/lib/mysql
