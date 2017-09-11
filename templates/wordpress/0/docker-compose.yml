@@ -4,13 +4,7 @@ volumes:
         driver: rancher-nfs
         driver_opts:
             onRemove: retain
-    raiz-app-usr-local:
-        driver: rancher-nfs
     raiz-app-wordpress-www:
-        driver: rancher-nfs
-        driver_opts:
-            onRemove: retain
-    raiz-app-wordpress-etc:
         driver: rancher-nfs
         driver_opts:
             onRemove: retain
@@ -37,9 +31,7 @@ services:
         - db:mysql
       volumes:
          - raiz-app-wordpress:/usr/src/wordpress
-         - raiz-app-wordpress-usr-local:/usr/local/
-         - raiz-app-wordpress-www:/var/www/
-         - raiz-app-wordpress-etc:/etc/
+         - raiz-app-wordpress-www:/var/www/html
 
     db:
       image: mariadb
