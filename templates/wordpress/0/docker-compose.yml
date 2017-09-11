@@ -1,4 +1,14 @@
 version: '2'
+volumes:
+    raiz-app-wordpress:
+        driver: rancher-nfs
+        driver_opts:
+            onRemove: retain
+    raiz-bd-wordpress:
+        driver: rancher-nfs
+        driver_opts:
+            onRemove: retain
+
 services:
     app-lb:
         ports:
@@ -15,8 +25,12 @@ services:
       image: wordpress
       links:
         - db:mysql
+      volumes:
+         - raiz-app-wordpress:/
 
     db:
       image: mariadb
       environment:
         MYSQL_ROOT_PASSWORD: ${db_password}
+      volumes:
+         - raiz-bd-wordpress:/
