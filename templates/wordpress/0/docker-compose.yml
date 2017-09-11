@@ -26,11 +26,11 @@ services:
       links:
         - db:mysql
       volumes:
-         - raiz-app-wordpress:/
+         - raiz-app-wordpress:/var/www
 
     db:
       image: mariadb
       environment:
         MYSQL_ROOT_PASSWORD: ${db_password}
       volumes:
-         - raiz-bd-wordpress:/
+         - raiz-bd-wordpress:/var/lib
