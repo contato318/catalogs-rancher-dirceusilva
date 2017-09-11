@@ -1,7 +1,7 @@
 version: '2'
 .catalog:
   name: Gitlab-CE
-  version: 0.0.1-wordpress-rancher
+  version: 0.0.1-gitlab-rancher
   description: |
     Alternativa opensource do Github
   minimum_rancher_version: v0.56.0
