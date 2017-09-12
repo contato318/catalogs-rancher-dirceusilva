@@ -1,0 +1,67 @@
+version: '2'
+.catalog:
+  name: Wordpress
+  version: 0.0.2-wordpress-rancher
+  description: |
+    O sistema de gerenciamento de conteúdo rico do WordPress pode utilizar plugins, widgets e temas.
+  minimum_rancher_version: v0.56.0
+  maintainer: "Dirceu Silva <contato@dirceusilva.com>"
+  questions:
+      - variable: db_password
+        description: "Senha para o banco de dados"
+        label: "Password (default: wordpress)"
+        required: true
+        default: "wordpress"
+        type: "password"
+      - variable: "domain_app"
+        description: "Informe a tag (FQDN) para esse serviço"
+        label: "FQDN Result:"
+        required: true
+        default: "wordpress.app"
+        type: "string"
+      - variable: "http_port"
+        description: "Porta HTTP que será exposta:"
+        label: "Porta HTTP:"
+        required: true
+        default: 9096
+        type: "int"
+      - variable: volume_driver
+        description: "Driver/Volume a ser utilizado para a persistência de dados"
+        label: "Volume driver"
+        required: true
+        default: "rancher-nfs"
+        type: enum
+        options:
+          - local
+          - rancher-nfs
+          - rancher-efs
+          - rancher-ebs
+
+
+services:
+
+    app-lb:
+      scale: 1
+      load_balancer_config:
+        haproxy_config: {}
+      health_check:
+        port: 42
+        interval: 2000
+        unhealthy_threshold: 3
+        strategy: recreate
+        response_timeout: 2000
+        healthy_threshold: 2
+
+    wordpress:
+        scale: 1
+        retain_ip: true
+        health_check:
+          port: 80
+          interval: 5000
+          unhealthy_threshold: 3
+          request_line: 'GET / HTTP/1.0'
+          healthy_threshold: 2
+          response_timeout: 5000
+
+    db:
+        scale: 1

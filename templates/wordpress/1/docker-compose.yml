@@ -1,0 +1,43 @@
+version: '2'
+volumes:
+    raiz-app-wordpress:
+        driver: ${volume_driver}
+        driver_opts:
+            onRemove: retain
+    raiz-app-wordpress-www:
+        driver: ${volume_driver}
+        driver_opts:
+            onRemove: retain
+    raiz-bd-wordpress:
+        driver: ${volume_driver}
+        driver_opts:
+            onRemove: retain
+
+services:
+    app-lb:
+        ports:
+        - ${http_port}:${http_port}
+        labels:
+          io.rancher.loadbalancer.target.wordpress: ${domain_app}:${http_port}=80
+        tty: true
+        image: rancher/load-balancer-service
+        links:
+        - wordpress:wordpress
+        stdin_open: true
+
+    wordpress:
+      image: wordpress
+      depends_on:
+        - db
+      links:
+        - db:mysql
+      volumes:
+         - raiz-app-wordpress-$${stack_name}-$${service_name}:/usr/src/wordpress
+         - raiz-app-wordpress-www-$${stack_name}-$${service_name}:/var/www/html
+
+    db:
+      image: mariadb
+      environment:
+        MYSQL_ROOT_PASSWORD: ${db_password}
+      volumes:
+         - raiz-bd-wordpress-$${stack_name}-$${service_name}:/var/lib/mysql

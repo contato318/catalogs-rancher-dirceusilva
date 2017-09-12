@@ -1,9 +1,9 @@
 ---
-name: Gitlab-CE
+name: OTRS
 description: >
-  Alternativa opensource para o Github
-version: 0.0.2-gitlab-rancher
-category: Versionamento
+  Sistema de ITSM moderno.
+version: 0.0.1-otrs5-rancher
+category: CMS
 maintainer: Dirceu Silva <contato@dirceusilva.com>
 license: GNU GPL v3
 projectURL: https://github.com/contato318/catalogs-rancher-dirceusilva

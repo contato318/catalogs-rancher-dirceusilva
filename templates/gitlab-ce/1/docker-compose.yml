@@ -1,0 +1,21 @@
+version: '2'
+services:
+    app-lb:
+        ports:
+        - ${http_port}:${http_port}
+        labels:
+          io.rancher.loadbalancer.target.gitlab: ${domain_app}:${http_port}=80
+        tty: true
+        image: rancher/load-balancer-service
+        links:
+        - gitlab:gitlab
+        stdin_open: true
+
+    gitlab:
+      labels:
+           io.rancher.container.start_once: 'true'
+      image: gitlab/gitlab-ce
+      volumes:
+        - /etc/gitlab
+        - /var/log/gitlab
+        - /var/opt/gitlab

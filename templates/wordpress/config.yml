@@ -2,7 +2,7 @@
 name: Wordpress
 description: >
   O sistema de gerenciamento de conteúdo rico do WordPress pode utilizar plugins, widgets e temas.
-version: 0.0.1-wordpress-rancher
+version: 0.0.2-wordpress-rancher
 category: CMS
 maintainer: Dirceu Silva <contato@dirceusilva.com>
 license: GNU GPL v3

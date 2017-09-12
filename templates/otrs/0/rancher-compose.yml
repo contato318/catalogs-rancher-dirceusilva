@@ -1,0 +1,48 @@
+version: '2'
+.catalog:
+  name: OTRS
+  version: 0.0.1-otrs5-rancher
+  description: |
+    Sistema de ITSM moderno. Versão 5.
+  minimum_rancher_version: v0.56.0
+  maintainer: "Dirceu Silva <contato@dirceusilva.com>"
+  questions:
+      - variable: db_password
+        description: "Senha para o banco de dados"
+        label: "Password (default: wordpress)"
+        required: true
+        default: "wordpress"
+        type: "password"
+      - variable: "domain_app"
+        description: "Informe a tag (FQDN) para esse serviço"
+        label: "FQDN Result:"
+        required: true
+        default: "wordpress.app"
+        type: "string"
+      - variable: "http_port"
+        description: "Porta HTTP que será exposta:"
+        label: "Porta HTTP:"
+        required: true
+        default: 9096
+        type: "int"
+
+
+services:
+
+    app-lb:
+      scale: 1
+      load_balancer_config:
+        haproxy_config: {}
+      health_check:
+        port: 42
+        interval: 2000
+        unhealthy_threshold: 3
+        strategy: recreate
+        response_timeout: 2000
+        healthy_threshold: 2
+
+    wordpress:
+        scale: 1
+
+    db:
+        scale: 1
