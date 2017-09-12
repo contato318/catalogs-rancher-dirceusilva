@@ -1,4 +1,17 @@
 version: '2'
+volumes:
+    gitlab-app-etc:
+        driver: ${volume_driver}
+        driver_opts:
+            onRemove: retain
+    git-lab-app-var-log:
+        driver: ${volume_driver}
+        driver_opts:
+            onRemove: retain
+    git-lab-app-var-opt:
+        driver: ${volume_driver}
+        driver_opts:
+            onRemove: retain
 services:
     app-lb:
         ports:
@@ -16,6 +29,6 @@ services:
            io.rancher.container.start_once: 'true'
       image: gitlab/gitlab-ce
       volumes:
-        - /etc/gitlab
-        - /var/log/gitlab
-        - /var/opt/gitlab
+        - gitlab-app-etc:/etc/gitlab
+        - git-lab-app-var-log:/var/log/gitlab
+        - git-lab-app-var-opt:/var/opt/gitlab
