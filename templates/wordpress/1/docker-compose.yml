@@ -32,12 +32,12 @@ services:
       links:
         - db:mysql
       volumes:
-         - raiz-app-wordpress-${stack_name}-${service_name}:/usr/src/wordpress
-         - raiz-app-wordpress-www-${stack_name}-${service_name}:/var/www/html
+         - raiz-app-wordpress:/usr/src/wordpress
+         - raiz-app-wordpress-www:/var/www/html
 
     db:
       image: mariadb
       environment:
         MYSQL_ROOT_PASSWORD: ${db_password}
       volumes:
-         - raiz-bd-wordpress-${stack_name}-${service_name}:/var/lib/mysql
+         - raiz-bd-wordpress:/var/lib/mysql
