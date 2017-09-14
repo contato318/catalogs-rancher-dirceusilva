@@ -15,11 +15,10 @@ volumes:
 services:
     app-lb:
         ports:
-        - ${ssh_port}:${ssh_port}
-        - ${http_port}:${http_port}
+        - ${ssh_port}:${ssh_port}/tcp
+        - ${http_port}:${http_port}/http
         labels:
           io.rancher.loadbalancer.target.gitlab: ${domain_app}:${http_port}=80
-          io.rancher.loadbalancer.target.gitlab: ${domain_app}:${ssh_port}=22
         tty: true
         image: rancher/load-balancer-service
         links:
