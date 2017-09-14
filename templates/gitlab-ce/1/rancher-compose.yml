@@ -19,6 +19,12 @@ version: '2'
         required: true
         default: 9097
         type: "int"
+      - variable: "ssh_port"
+        description: "Porta HTTP que será exposta:"
+        label: "Porta HTTP:"
+        required: true
+        default: 9097
+        type: "int"
       - variable: volume_driver
         description: "Driver/Volume a ser utilizado para a persistência de dados"
         label: "Volume driver"
@@ -28,8 +34,7 @@ version: '2'
         options:
           - local
           - rancher-nfs
-          - rancher-efs
-          - rancher-ebs
+
 
 
 services:

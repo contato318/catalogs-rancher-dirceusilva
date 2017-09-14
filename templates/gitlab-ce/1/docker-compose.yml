@@ -15,19 +15,25 @@ volumes:
 services:
     app-lb:
         ports:
+        - ${ssh_port}:${ssh_port}
         - ${http_port}:${http_port}
         labels:
           io.rancher.loadbalancer.target.gitlab: ${domain_app}:${http_port}=80
+          io.rancher.loadbalancer.target.gitlab: ${domain_app}:${ssh_port}=22
         tty: true
         image: rancher/load-balancer-service
         links:
-        - gitlab:gitlab
+            - gitlab:gitlab
         stdin_open: true
 
     gitlab:
-      labels:
-           io.rancher.container.start_once: 'true'
       image: gitlab/gitlab-ce
+      environment:
+        GITLAB_OMNIBUS_CONFIG: |
+          external_url 'http://${gitlab_hostname}'
+          gitlab_rails['gitlab_shell_ssh_port'] = ${ssh_port}
+      labels:
+        io.rancher.container.hostname_override: container_name
       volumes:
         - gitlab-app-etc:/etc/gitlab
         - git-lab-app-var-log:/var/log/gitlab
