@@ -20,8 +20,8 @@ version: '2'
         default: 9097
         type: "int"
       - variable: "ssh_port"
-        description: "Porta HTTP que será exposta:"
-        label: "Porta HTTP:"
+        description: "Porta SSH que será exposta:"
+        label: "Porta SSH:"
         required: true
         default: 9097
         type: "int"
