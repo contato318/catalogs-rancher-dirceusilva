@@ -16,7 +16,7 @@ services:
     app-lb:
         ports:
         - ${ssh_port}:${ssh_port}/tcp
-        - ${http_port}:${http_port}/http
+        - ${http_port}:${http_port}
         labels:
           io.rancher.loadbalancer.target.gitlab: ${domain_app}:${http_port}=80
         tty: true
