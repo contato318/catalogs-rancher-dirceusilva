@@ -5,6 +5,7 @@ services:
         - ${http_port}:${http_port}
         labels:
           io.rancher.loadbalancer.target.wordpress: ${domain_app}:${http_port}=80
+          io.rancher.scheduler.affinity:host_label: server=proxy
         tty: true
         image: rancher/load-balancer-service
         links:

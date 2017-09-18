@@ -6,6 +6,7 @@ services:
         labels:
           io.rancher.loadbalancer.target.vote: ${domain_vote}:${http_port}=80
           io.rancher.loadbalancer.target.result: ${domain_result}:${http_port}=80
+          io.rancher.scheduler.affinity:host_label: server=proxy
         tty: true
         image: rancher/load-balancer-service
         links:

@@ -5,6 +5,7 @@ services:
     - ${http_port}:${http_port}/tcp
     labels:
       io.rancher.loadbalancer.target.joomla: ${joomla_hostname}:${http_port}=80
+      io.rancher.scheduler.affinity:host_label: server=proxy
     tty: true
     image: rancher/load-balancer-service
     links:
@@ -16,9 +17,8 @@ services:
       - joomladb:mysql
     environment:
       JOOMLA_DB_PASSWORD: ${db_password}
- 
+
   joomladb:
     image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: ${db_password}
- 
