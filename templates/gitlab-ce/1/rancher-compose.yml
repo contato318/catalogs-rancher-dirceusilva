@@ -50,6 +50,16 @@ services:
         strategy: recreate
         response_timeout: 2000
         healthy_threshold: 2
+        port_rules:
+            - protocol: tcp
+              service: gitlab
+              source_port: ${ssh_port}
+              target_port: 22
+            - hostname: ${domain_app}
+              protocol: http
+              service: gitlab
+              source_port: :${http_port}
+              target_port: 80
 
     gitlab:
         scale: 1
