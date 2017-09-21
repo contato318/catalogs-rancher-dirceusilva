@@ -2,7 +2,7 @@
 name: Gitlab-CE
 description: >
   Alternativa opensource para o Github
-version: 0.0.2-gitlab-rancher
+version: 0.0.3-gitlab-rancher
 category: Versionamento
 maintainer: Dirceu Silva <contato@dirceusilva.com>
 license: GNU GPL v3

@@ -1,0 +1,39 @@
+version: '2'
+volumes:
+    gitlab-app-etc:
+        driver: ${volume_driver}
+        driver_opts:
+            onRemove: retain
+    git-lab-app-var-log:
+        driver: ${volume_driver}
+        driver_opts:
+            onRemove: retain
+    git-lab-app-var-opt:
+        driver: ${volume_driver}
+        driver_opts:
+            onRemove: retain
+services:
+    app-lb:
+        ports:
+        - ${http_port}:${http_port}
+        labels:
+          io.rancher.loadbalancer.target.gitlab: ${domain_app}:${http_port}=80
+          io.rancher.scheduler.affinity:host_label: server=proxy
+        tty: true
+        image: rancher/load-balancer-service
+        links:
+            - gitlab:gitlab
+        stdin_open: true
+
+
+    gitlab:
+      image: gitlab/gitlab-ce
+      environment:
+        GITLAB_OMNIBUS_CONFIG: |
+          external_url 'http://${domain_app}'
+      labels:
+        io.rancher.container.hostname_override: container_name
+      volumes:
+        - gitlab-app-etc:/etc/gitlab
+        - git-lab-app-var-log:/var/log/gitlab
+        - git-lab-app-var-opt:/var/opt/gitlab
