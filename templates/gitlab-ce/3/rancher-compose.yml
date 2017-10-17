@@ -41,8 +41,8 @@ version: '2'
       - variable: "GITLAB_SMTP_PORT"
         required: false
         type: "int"
-        label: "25"
-        default: "false"
+        label: "SMTP port"
+        default: "25"
       - variable: "GITLAB_SMTP_USER_NAME"
         type: "string"
         label: "SMTP user"
@@ -60,7 +60,7 @@ version: '2'
         required: false
       - variable: "GITLAB_SMTP_AUTHENTICATION"
         required: false
-        type: "login"
+        type: "string"
         label: "SMTP authentication"
         default: "plain"
       - variable: "GITLAB_SMTP_ENABLE_STARTTLS_AUTO"
