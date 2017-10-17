@@ -1,0 +1,109 @@
+version: '2'
+.catalog:
+  name: Gitlab-CE
+  version: 0.0.3-gitlab-rancher
+  description: |
+    Alternativa opensource do Github
+  minimum_rancher_version: v0.56.0
+  maintainer: "Dirceu Silva <contato@dirceusilva.com>"
+  questions:
+      - variable: "domain_app"
+        description: "Informe a tag (FQDN) para esse serviço"
+        label: "FQDN Result:"
+        required: true
+        default: "gitlab.app"
+        type: "string"
+      - variable: "http_port"
+        description: "Porta HTTP que será exposta:"
+        label: "Porta HTTP:"
+        required: true
+        default: 9097
+        type: "int"
+      - variable: volume_driver
+        description: "Driver/Volume a ser utilizado para a persistência de dados"
+        label: "Volume driver"
+        required: true
+        default: "rancher-nfs"
+        type: enum
+        options:
+          - local
+          - rancher-nfs
+      - variable: "GITLAB_SMTP_ENABLE"
+        required: false
+        type: "string"
+        label: "SMTP habilitado?"
+        default: "false"
+      - variable: "GITLAB_SMTP_ADDRESS"
+        required: false
+        type: "string"
+        label: "Endereço SMTP"
+        default: "127.0.0.1"
+      - variable: "GITLAB_SMTP_PORT"
+        required: false
+        type: "int"
+        label: "25"
+        default: "false"
+      - variable: "GITLAB_SMTP_USER_NAME"
+        type: "string"
+        label: "SMTP user"
+        default: "user"
+        required: false
+      - variable: "GITLAB_SMTP_PASSWORD"
+        type: "string"
+        label: "SMTP pass"
+        default: "senha..."
+        required: false
+      - variable: "GITLAB_SMTP_DOMAIN"
+        type: "string"
+        label: "SMTP domain"
+        default: "smtp.com.br"
+        required: false
+      - variable: "GITLAB_SMTP_AUTHENTICATION"
+        required: false
+        type: "login"
+        label: "SMTP authentication"
+        default: "plain"
+      - variable: "GITLAB_SMTP_ENABLE_STARTTLS_AUTO"
+        required: false
+        type: "string"
+        label: "SMTP start tls"
+        default: "false"
+      - variable: "GITLAB_SMTP_TLS"
+        required: false
+        type: "string"
+        label: "SMTP TLS"
+        default: "false"
+      - variable: "GITLAB_SMTP_OPENSSL_VERIFY_MODE"
+        required: false
+        type: "string"
+        label: "SMTP OpenSSL verify mode"
+        default: "peer"
+
+
+
+services:
+
+    app-lb:
+      scale: 1
+      load_balancer_config:
+        haproxy_config: {}
+      health_check:
+        port: 42
+        interval: 2000
+        unhealthy_threshold: 3
+        strategy: recreate
+        response_timeout: 2000
+        healthy_threshold: 2
+        port_rules:
+            - protocol: tcp
+              service: gitlab
+              source_port: ${ssh_port}
+              target_port: 22
+            - hostname: ${domain_app}
+              protocol: http
+              service: gitlab
+              source_port: :${http_port}
+              target_port: 80
+
+    gitlab:
+        scale: 1
