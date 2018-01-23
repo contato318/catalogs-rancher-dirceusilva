@@ -37,7 +37,6 @@ services:
   vote:
     labels:
       io.rancher.container.pull_image: always
-      io.rancher.container.hostname_override: container_name
     tty: true
     image: davecss/vote
     links:
