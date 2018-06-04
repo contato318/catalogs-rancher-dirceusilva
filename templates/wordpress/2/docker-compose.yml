@@ -16,7 +16,7 @@ services:
     stdin_open: true
     tty: true
     ports:
-      - ${http_port}:80
+      - ${http_port}:${http_port}
     labels:
       io.rancher.scheduler.affinity:host_label: server=proxy
       io.rancher.loadbalancer.target.wordpress: ${domain_app}:${http_port}=80
