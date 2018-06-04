@@ -16,7 +16,7 @@ services:
     stdin_open: true
     tty: true
     ports:
-      - ${http_port}:${http_port}
+      - ${http_port}:80
     labels:
       io.rancher.scheduler.affinity:host_label: server=proxy
       io.rancher.loadbalancer.target.wordpress: ${domain_app}:${http_port}=80
@@ -51,19 +51,3 @@ services:
        WORDPRESS_DB_HOST: db:3306
        WORDPRESS_DB_USER: wordpress
        WORDPRESS_DB_PASSWORD: ${db_password}
-
-
-version: '2'
-volumes:
-    raiz-app-wordpress:
-        driver: ${volume_driver}
-        driver_opts:
-            onRemove: retain
-    raiz-app-wordpress-www:
-        driver: ${volume_driver}
-        driver_opts:
-            onRemove: retain
-    raiz-bd-wordpress:
-        driver: ${volume_driver}
-        driver_opts:
-            onRemove: retain
