@@ -1,0 +1,53 @@
+version: '2'
+volumes:
+  wordpress_data:
+    driver_opts:
+      onRemove: retain
+    driver: rancher-nfs
+  db_data:
+    driver_opts:
+      onRemove: retain
+    driver: rancher-nfs
+
+
+services:
+  app-lb:
+    image: rancher/load-balancer-service
+    stdin_open: true
+    tty: true
+    ports:
+      - ${http_port}:${http_port}
+    labels:
+      io.rancher.scheduler.affinity:host_label: server=proxy
+      io.rancher.loadbalancer.target.wordpress: ${domain_app}:${http_port}=80
+    links:
+        - wordpress
+
+  db:
+       image: mysql:5.7
+       labels:
+         io.rancher.scheduler.affinity:host_label: server=app
+       volumes:
+         - db_data:/var/lib/mysql
+       restart: always
+       environment:
+         MYSQL_ROOT_PASSWORD: somewordpress
+         MYSQL_DATABASE: wordpress
+         MYSQL_USER: wordpress
+         MYSQL_PASSWORD: ${db_password}
+
+  wordpress:
+    image: wordpress:latest
+    restart: always
+    depends_on:
+      - db
+    labels:
+      io.rancher.scheduler.affinity:host_label: server=app
+    volumes:
+      - wordpress_data:/var/www/html/
+    links:
+      - db
+    environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD: ${db_password}
