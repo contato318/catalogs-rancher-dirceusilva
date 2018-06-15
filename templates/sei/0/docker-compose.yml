@@ -21,7 +21,7 @@ services:
         io.rancher.scheduler.affinity:host_label: server=proxy
         io.rancher.loadbalancer.target.sei: ${domain_app}:${http_port}=80
       links:
-          - httpd
+          - http
   jod:
     restart: always
     image: dirceusilva/sei-jod
