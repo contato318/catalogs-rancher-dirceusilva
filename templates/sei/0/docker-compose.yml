@@ -1,0 +1,87 @@
+version: '3.0'
+
+volumes:
+  sei_data:
+    driver_opts:
+      onRemove: retain
+    driver: rancher-nfs
+  db_data:
+    driver_opts:
+      onRemove: retain
+    driver: rancher-nfs
+
+services:
+  app-lb:
+      image: rancher/load-balancer-service
+      stdin_open: true
+      tty: true
+      ports:
+        - ${http_port}:${http_port}
+      labels:
+        io.rancher.scheduler.affinity:host_label: server=proxy
+        io.rancher.loadbalancer.target.sei: ${domain_app}:${http_port}=80
+      links:
+          - httpd
+  jod:
+    restart: always
+    image: dirceusilva/sei-jod
+    container_name: sei-jod
+    labels:
+      io.rancher.scheduler.affinity:host_label: server=app
+
+  smtp:
+      restart: always
+      image: dirceusilva/sei-mailcatcher
+      container_name: sei-smtp
+      labels:
+          io.rancher.scheduler.affinity:host_label: server=app
+
+  memcached:
+    restart: always
+    image: dirceusilva/sei-memcached
+    container_name: sei-memcached
+    labels:
+      io.rancher.scheduler.affinity:host_label: server=app
+
+  mysql:
+    image: dirceusilva/sei-mysql
+    container_name: mysql
+    labels:
+      io.rancher.scheduler.affinity:host_label: server=app
+    environment:
+      - MYSQL_DATABASE=sei
+      - MYSQL_ROOT_PASSWORD=root
+      - SEI_DATABASE_USER=root
+      - SEI_DATABASE_PASSWORD=sei
+      - SEI_HOST_URL=http://localhost
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+
+  solr:
+    restart: always
+    image: dirceusilva/sei-solr
+    container_name: solr
+    labels:
+      io.rancher.scheduler.affinity:host_label: server=app
+
+
+  http:
+    image: dirceusilva/sei-httpd
+    labels:
+      io.rancher.scheduler.affinity:host_label: server=app
+    container_name: httpd
+    dns: "8.8.8.8"
+    restart: always
+    volumes:
+      - sei_data:/var/sei/arquivos
+    environment:
+      - SEI_HOST_URL=http://localhost
+      - SEI_DATABASE_USER=root
+      - SEI_DATABASE_PASSWORD=sei
+    links:
+      - mysql:mysql
+      - memcached:memcached
+      - solr:solr
+      - smtp:smtp
+      - jod:jod
