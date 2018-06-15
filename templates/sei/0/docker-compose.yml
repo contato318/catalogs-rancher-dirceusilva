@@ -50,10 +50,10 @@ services:
       io.rancher.scheduler.affinity:host_label: server=app
     environment:
       - MYSQL_DATABASE=sei
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=${db_password}
       - SEI_DATABASE_USER=root
-      - SEI_DATABASE_PASSWORD=sei
-      - SEI_HOST_URL=http://localhost
+      - SEI_DATABASE_PASSWORD=${db_password}
+      - SEI_HOST_URL=http://${domain_app}
     volumes:
       - db_data:/var/lib/mysql
     restart: always
@@ -76,9 +76,9 @@ services:
     volumes:
       - sei_data:/var/sei/arquivos
     environment:
-      - SEI_HOST_URL=http://localhost
+      - SEI_HOST_URL=http://${domain_app}
       - SEI_DATABASE_USER=root
-      - SEI_DATABASE_PASSWORD=sei
+      - SEI_DATABASE_PASSWORD=${db_password}
     links:
       - mysql:mysql
       - memcached:memcached
