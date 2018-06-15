@@ -40,16 +40,15 @@ services:
         strategy: recreate
         response_timeout: 2000
         healthy_threshold: 2
-
-  jod:
+    jod:
       scale: 1
-  smtp:
-      scale: 1
-  memcached:
-      scale: 1
-  mysql:
-      scale: 1
-  solr:
-       scale: 1
-  http:
-       scale: 1
+    smtp:
+        scale: 1
+    memcached:
+        scale: 1
+    mysql:
+        scale: 1
+    solr:
+         scale: 1
+    http:
+         scale: 1
