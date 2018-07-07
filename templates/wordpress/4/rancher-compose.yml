@@ -53,7 +53,7 @@ services:
         healthy_threshold: 2
 
     wordpress:
-        scale: 1
+        scale: 2
         retain_ip: true
         health_check:
           port: 80
