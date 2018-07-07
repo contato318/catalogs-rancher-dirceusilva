@@ -3,7 +3,7 @@ version: '2'
   name: Wordpress
   version: 0.0.5-wordpress-rancher
   description: |
-    Nome Joao!  sistema de gerenciamento de conteúdo rico do WordPress pode utilizar plugins, widgets e temas.
+    Sistema de gerenciamento de conteúdo rico do WordPress pode utilizar plugins, widgets e temas.
   minimum_rancher_version: v0.56.0
   maintainer: "Dirceu Silva <contato@dirceusilva.com>"
   questions:
