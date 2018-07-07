@@ -25,7 +25,6 @@ services:
 
   db:
        image: mysql:5.7
-       user: "1000:1000"
        labels:
          io.rancher.scheduler.affinity:host_label: server=app
        volumes:
@@ -40,7 +39,6 @@ services:
   wordpress:
     image: wordpress:latest
     restart: always
-    user: "1000:1000"
     depends_on:
       - db
     labels:
