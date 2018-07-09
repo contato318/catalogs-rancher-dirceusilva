@@ -1,7 +1,7 @@
 ---
 name: SEI
 description: >
-  Sistema SEI
+  Sistema SEI utilizando a BASE DE REFERÊNCIA
 version: 0.0.2-sei-rancher
 category: EGOV
 maintainer: Dirceu Silva <contato@dirceusilva.com>
