@@ -9,7 +9,7 @@ version: '2'
   questions:
       - variable: db_password
         description: "Senha para o banco de dados"
-        label: "Password (default: seiBANCOsenha)"
+        label: "Password (default: sei)"
         required: true
         default: "sei"
         type: "password"

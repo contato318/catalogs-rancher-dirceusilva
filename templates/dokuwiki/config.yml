@@ -3,7 +3,7 @@ name: Dokuwiki
 description: Software utilizado para armazenar documentação.
 version:  v0.1-dokuwiki
 category: Wiki
-maintainer: Luiz Henrique <luiz@madeiracampos.com>
+maintainer: Dirceu Silva <contato@dirceusilva.com>
 license: GNU GPL v3
 projectURL:
- https://github.com/luiz-madeira/catalogs-rancher
+ https://github.com/contato318/catalogs-rancher-dirceusilva/
