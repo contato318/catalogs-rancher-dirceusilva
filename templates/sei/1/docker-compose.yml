@@ -1,0 +1,93 @@
+version: '2'
+
+volumes:
+  sei_data:
+    driver_opts:
+      onRemove: retain
+    driver: rancher-nfs
+  db_data:
+    driver_opts:
+      onRemove: retain
+    driver: rancher-nfs
+
+services:
+  app-lb:
+      image: rancher/load-balancer-service
+      stdin_open: true
+      tty: true
+      dns: ${DNS}
+      ports:
+        - ${http_port}:${http_port}
+      labels:
+        io.rancher.scheduler.affinity:host_label: server=proxy
+        io.rancher.loadbalancer.target.sei: ${domain_app}:${http_port}=80
+      links:
+          - http
+  jod:
+    restart: always
+    image: dirceusilva/sei-jod:1.0
+    container_name: sei-jod
+    dns: ${DNS}
+    labels:
+      io.rancher.scheduler.affinity:host_label: server=app
+
+  smtp:
+      restart: always
+      image: dirceusilva/sei-mailcatcher:1.0
+      container_name: sei-smtp
+      dns: ${DNS}
+      labels:
+          io.rancher.scheduler.affinity:host_label: server=app
+
+  memcached:
+    restart: always
+    dns: ${DNS}
+    image: dirceusilva/sei-memcached:1.0
+    container_name: sei-memcached
+    labels:
+      io.rancher.scheduler.affinity:host_label: server=app
+
+  mysql:
+    image: dirceusilva/sei-mysql:1.0
+    container_name: mysql
+    dns: ${DNS}
+    labels:
+      io.rancher.scheduler.affinity:host_label: server=app
+    environment:
+      - MYSQL_DATABASE=sei
+      - MYSQL_ROOT_PASSWORD=${db_password}
+      - SEI_DATABASE_USER=root
+      - SEI_DATABASE_PASSWORD=${db_password}
+      - SEI_HOST_URL=http://${domain_app}
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+
+  solr:
+    restart: always
+    image: dirceusilva/sei-solr:1.0
+    container_name: solr
+    dns: ${DNS}
+    labels:
+      io.rancher.scheduler.affinity:host_label: server=app
+
+
+  http:
+    image: dirceusilva/sei-httpd:1.0
+    labels:
+      io.rancher.scheduler.affinity:host_label: server=app
+    container_name: httpd
+    dns: ${DNS}
+    restart: always
+    volumes:
+      - sei_data:/var/sei/arquivos
+    environment:
+      - SEI_HOST_URL=http://${domain_app}
+      - SEI_DATABASE_USER=root
+      - SEI_DATABASE_PASSWORD=${db_password}
+    links:
+      - mysql:mysql
+      - memcached:memcached
+      - solr:solr
+      - smtp:smtp
+      - jod:jod

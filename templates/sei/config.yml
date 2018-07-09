@@ -2,7 +2,7 @@
 name: SEI
 description: >
   Sistema SEI
-version: 0.0.1-sei-rancher
+version: 0.0.2-sei-rancher
 category: EGOV
 maintainer: Dirceu Silva <contato@dirceusilva.com>
 license: GNU GPL v3

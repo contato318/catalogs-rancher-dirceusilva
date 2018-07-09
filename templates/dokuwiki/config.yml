@@ -1,7 +1,7 @@
 ---
 name: Dokuwiki
 description: Software utilizado para armazenar documentação.
-version:  v0.1-dokuwiki
+version:  v0.2-dokuwiki
 category: Wiki
 maintainer: Dirceu Silva <contato@dirceusilva.com>
 license: GNU GPL v3
