@@ -17,7 +17,7 @@ version: '2'
         description: "Informe a tag (FQDN) para esse serviço"
         label: "FQDN Result:"
         required: true
-        default: "sei.fazenda.antaq.gov.br"
+        default: "sei-ref.fazenda.orgao.gov.br"
         type: "string"
       - variable: "http_port"
         description: "Porta HTTP que será exposta:"
