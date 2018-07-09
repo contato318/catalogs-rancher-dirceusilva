@@ -25,6 +25,12 @@ version: '2'
         required: true
         default: 80
         type: "int"
+      - variable: "DNS"
+        description: "Endereço do DNS"
+        label: "DNS:"
+        required: true
+        default: "10.61.0.66"
+        type: "string"
 
 
 services:

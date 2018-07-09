@@ -15,6 +15,7 @@ services:
       image: rancher/load-balancer-service
       stdin_open: true
       tty: true
+      dns: ${DNS}
       ports:
         - ${http_port}:${http_port}
       labels:
@@ -26,6 +27,7 @@ services:
     restart: always
     image: dirceusilva/sei-jod
     container_name: sei-jod
+    dns: ${DNS}
     labels:
       io.rancher.scheduler.affinity:host_label: server=app
 
@@ -33,11 +35,13 @@ services:
       restart: always
       image: dirceusilva/sei-mailcatcher
       container_name: sei-smtp
+      dns: ${DNS}
       labels:
           io.rancher.scheduler.affinity:host_label: server=app
 
   memcached:
     restart: always
+    dns: ${DNS}
     image: dirceusilva/sei-memcached
     container_name: sei-memcached
     labels:
@@ -46,6 +50,7 @@ services:
   mysql:
     image: dirceusilva/sei-mysql
     container_name: mysql
+    dns: ${DNS}
     labels:
       io.rancher.scheduler.affinity:host_label: server=app
     environment:
@@ -62,6 +67,7 @@ services:
     restart: always
     image: dirceusilva/sei-solr
     container_name: solr
+    dns: ${DNS}
     labels:
       io.rancher.scheduler.affinity:host_label: server=app
 
@@ -71,7 +77,7 @@ services:
     labels:
       io.rancher.scheduler.affinity:host_label: server=app
     container_name: httpd
-    dns: "8.8.8.8"
+    dns: ${DNS}
     restart: always
     volumes:
       - sei_data:/var/sei/arquivos
