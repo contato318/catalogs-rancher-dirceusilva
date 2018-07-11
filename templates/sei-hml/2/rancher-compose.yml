@@ -37,18 +37,16 @@ version: '2'
         required: true
         type: enum
         options:
-          - "/dados-container/SEI_HML/banco/v0/sei_mysql.sql"
-          - "/dados-container/SEI_HML/banco/v1/sei_mysql.sql"
-        type: "string"
+          - /dados-container/SEI_HML/banco/v0/sei_mysql.sql
+          - /dados-container/SEI_HML/banco/v1/sei_mysql.sql
       - variable: "Banco SIP"
         description: "Versão da fonte de dados"
         label: "BD_VERSION_SIP"
         required: true
         type: enum
         options:
-          - "/dados-container/SEI_HML/banco/v0/sip_mysql.sql"
-          - "/dados-container/SEI_HML/banco/v1/sip_mysql.sql"
-        type: "string"
+          - /dados-container/SEI_HML/banco/v0/sip_mysql.sql
+          - /dados-container/SEI_HML/banco/v1/sip_mysql.sql
 
 
 services:
