@@ -1,7 +1,7 @@
 version: '2'
 .catalog:
   name: SEI
-  version: 0.0.5-sei-rancher
+  version: 0.0.6-sei-rancher
   description: |
     O sistema de SEI.
   minimum_rancher_version: v0.56.0
