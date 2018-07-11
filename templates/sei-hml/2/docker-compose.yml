@@ -48,7 +48,7 @@ services:
       io.rancher.scheduler.affinity:host_label: server=app
 
   mysql:
-    image: dirceusilva/sei-mysql:1.0
+    image: dirceusilva/sei-mysql:3.0
     container_name: mysql
     dns: ${DNS}
     labels:
