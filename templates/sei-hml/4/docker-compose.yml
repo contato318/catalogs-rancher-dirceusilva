@@ -74,7 +74,7 @@ services:
 
 
   http:
-    image: dirceusilva/sei-httpd:2.0
+    image: dirceusilva/sei-httpd:3.0
     labels:
       io.rancher.scheduler.affinity:host_label: server=app
     container_name: httpd
