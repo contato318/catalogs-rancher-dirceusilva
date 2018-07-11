@@ -61,8 +61,7 @@ services:
       - SEI_HOST_URL=http://${domain_app}
     volumes:
       - db_data:/var/lib/mysql
-      - ${BD_VERSION_SEI}:/tmp/sei_mysql.sql
-      - ${BD_VERSION_SIP}:/tmp/sip_mysql.sql
+      - ${BD_CAMINHO}:/tmp/banco/
     restart: always
 
   solr:
