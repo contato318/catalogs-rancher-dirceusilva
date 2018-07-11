@@ -31,9 +31,9 @@ version: '2'
         required: true
         default: "10.61.0.66"
         type: "string"
-      - variable: "Banco CAMINHO"
+      - variable: "BD_CAMINHO"
         description: "Versão da fonte de dados"
-        label: "BD_CAMINHO"
+        label: "Caminho dos arquivos do banco"
         required: true
         type: enum
         options:
