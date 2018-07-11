@@ -1,7 +1,7 @@
 version: '2'
 .catalog:
   name: SEI
-  version: 0.0.2-sei-rancher
+  version: 0.0.3-sei-rancher
   description: |
     O sistema de SEI.
   minimum_rancher_version: v0.56.0
@@ -31,6 +31,25 @@ version: '2'
         required: true
         default: "10.61.0.66"
         type: "string"
+      - variable: "Banco SEI"
+        description: "Versão da fonte de dados
+        label: "BD_VERSION_SEI"
+        required: true
+        type: enum
+        options:
+          - "/dados-container/SEI_HML/banco/v0/sei_mysql.sql"
+          - "/dados-container/SEI_HML/banco/v1/sei_mysql.sql"
+        type: "string"
+      - variable: "Banco SIP"
+        description: "Versão da fonte de dados
+        label: "BD_VERSION_SIP"
+        required: true
+        type: enum
+        options:
+          - "/dados-container/SEI_HML/banco/v0/sip_mysql.sql"
+          - "/dados-container/SEI_HML/banco/v1/sip_mysql.sql"
+        type: "string"
+
 
 services:
 
