@@ -1,10 +1,6 @@
 version: '2'
 
 volumes:
-  sei_data:
-    driver_opts:
-      onRemove: retain
-    driver: rancher-nfs
   db_data:
     driver_opts:
       onRemove: retain
@@ -81,7 +77,7 @@ services:
     dns: ${DNS}
     restart: always
     volumes:
-      - sei_data:/var/sei/arquivos
+      - ${FILES_CAMINHO}:/var/sei/arquivos
     environment:
       - SEI_HOST_URL=http://${domain_app}
       - SEI_DATABASE_USER=root
