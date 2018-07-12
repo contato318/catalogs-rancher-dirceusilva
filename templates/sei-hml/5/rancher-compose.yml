@@ -38,7 +38,7 @@ version: '2'
         default: "10.61.0.66"
         type: "string"
       - variable: "MUDA_CONF"
-        description: "Deseja sobescrever a configuração do SEI?
+        description: "Deseja sobescrever a configuração do SEI?"
         label: "Reescrever as configurações do SEI/SIP:"
         required: true
         type: enum
