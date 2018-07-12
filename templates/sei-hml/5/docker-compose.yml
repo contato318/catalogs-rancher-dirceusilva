@@ -74,7 +74,7 @@ services:
 
 
   http:
-    image: dirceusilva/sei-httpd:3.1
+    image: dirceusilva/sei-httpd:3.2
     labels:
       io.rancher.scheduler.affinity:host_label: server=app
     container_name: httpd
@@ -87,6 +87,7 @@ services:
       - SEI_DATABASE_USER=root
       - SEI_DATABASE_PASSWORD=${db_password}
       - SEI_ORGAO=${SEI_ORGAO}
+      - MUDA_CONF=${MUDA_CONF}
     links:
       - mysql:mysql
       - memcached:memcached
