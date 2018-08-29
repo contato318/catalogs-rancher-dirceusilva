@@ -2,7 +2,7 @@
 name: SEI-HML
 description: >
   Sistema SEI de Homologação
-version: 0.1.1-sei-rancher
+version: 0.1.2-sei-rancher
 category: EGOV
 maintainer: Dirceu Silva <contato@dirceusilva.com>
 license: GNU GPL v3
