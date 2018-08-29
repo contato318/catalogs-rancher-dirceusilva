@@ -1,0 +1,97 @@
+version: '2'
+.catalog:
+  name: SEI
+  version: 0.1.2-sei-rancher
+  description: |
+    O sistema de SEI.
+  minimum_rancher_version: v0.56.0
+  maintainer: "Dirceu Silva <contato@dirceusilva.com>"
+  questions:
+      - variable: db_password
+        description: "Senha para o banco de dados"
+        label: "Password (default: sei)"
+        required: true
+        default: "sei"
+        type: "password"
+      - variable: "domain_app"
+        description: "Informe a tag (FQDN) para esse serviço"
+        label: "FQDN Result:"
+        required: true
+        default: "sei-hml.fazenda.orgao.gov.br"
+        type: "string"
+      - variable: "SEI_ORGAO"
+        description: "Informe o órgõo do SEI/SIP"
+        label: "Órgao:"
+        required: true
+        default: "ABC"
+        type: "string"
+      - variable: "SEI_DESCRICAO_ORGAO"
+        description: "Descrição do órgão"
+        label: "Descrição Órgao:"
+        required: true
+        default: "Órgão XPTO"
+        type: "string"
+      - variable: "http_port"
+        description: "Porta HTTP que será exposta:"
+        label: "Porta HTTP:"
+        required: true
+        default: 80
+        type: "int"
+      - variable: "DNS"
+        description: "Endereço do DNS"
+        label: "DNS:"
+        required: true
+        default: "10.61.0.66"
+        type: "string"
+      - variable: "MUDA_CONF"
+        description: "Deseja sobescrever a configuração do SEI?"
+        label: "Reescrever as configurações do SEI/SIP:"
+        required: true
+        type: enum
+        options:
+          - SIM
+          - NAO
+      - variable: "BD_CAMINHO"
+        description: "Versão da fonte de dados"
+        label: "Caminho dos arquivos do banco"
+        required: true
+        type: enum
+        options:
+          - /dados-container/SEI_HML/banco/v0/
+          - /dados-container/SEI_HML/banco/v1/
+      - variable: "FILES_CAMINHO"
+        description: "Caminho dos arquivos e processos"
+        label: "Caminho dos arquivos dos processos"
+        required: true
+        type: enum
+        options:
+          - /dados-container/SEI_HML/arquivos/
+          - /opt/rancher/sei-hml/v0/
+
+
+
+services:
+
+    app-lb:
+      scale: 1
+      load_balancer_config:
+        haproxy_config: {}
+      health_check:
+        port: 42
+        interval: 2000
+        unhealthy_threshold: 3
+        strategy: recreate
+        response_timeout: 2000
+        healthy_threshold: 2
+    jod:
+      scale: 1
+    smtp:
+        scale: 1
+    memcached:
+        scale: 1
+    mysql:
+        scale: 1
+    solr:
+         scale: 1
+    http:
+         scale: 1
